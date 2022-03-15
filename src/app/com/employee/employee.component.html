@@ -1,0 +1,93 @@
+
+<p>hghgjhggjhg</p>
+{{students|json}}
+{{l}}{{id|json}}
+<form [formGroup]="Sform" (ngSubmit)="ins($event)">
+  <input type="text" formControlName="name" name="n">
+  <input type="text" formControlName="family" name="f">
+  <button type="submit">insert</button>
+<div [innerHTML]="value"></div>
+</form>
+<ul>
+  <li *ngFor="let student of students">{{student|json}}</li>
+</ul>
+<div class="row">
+  <div class="col-9">
+   <div class="col-12 d-flex">
+       <div class="col-6">
+<form [formGroup]="formselect" *ngIf="students">
+         <ng-select formControlName="students"  name="student" (change)="selectname(student.items)" [(ngModel)]="selectedstudent">
+           <ng-option [value]=""></ng-option>
+           <ng-option #student *ngFor="let student of students"  [value]="student.id" >{{student.name}}</ng-option>
+         </ng-select>
+         <ng-select formControlName="colors" [disabled]="!selectedstudent" [(ngModel)]="favoritecolor">
+           <ng-option *ngFor="let color of colors;let p=index;" [value]="p">{{color}}</ng-option>
+         </ng-select>
+</form>
+       </div>
+
+        <div class="col-6" >
+          <table class="table-info" style="border-bottom-color: red">
+            <thead>
+            <th>remove</th>
+            <th>id</th>
+            <th>name</th>
+            <th>family</th>
+            <th>#</th>
+            </thead>
+            <tr *ngFor="let student of students | paginate: { itemsPerPage: 1, currentPage: p }">
+
+              <td><img src="assets/illust58-7381-01.jpg"  style="width: 20px;height: 20px" alt="delete" (click)="remove(p)"></td>
+              <td>
+                {{student.id}}
+              </td>
+              <td (click)="showname(student.id)">{{student.name}}</td>
+              <td>{{student.family}}</td>
+              <td><input type="checkbox" ></td>
+            </tr>
+          </table>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+        </div>
+     </div>
+  </div>
+  <div class="col-3">
+    <div class="col-12">
+
+
+    <p>hghgfgfffgfgggggggggggggggggggggggggggg</p>
+    </div>
+  </div>
+</div>
+<p>{{filtername}}</p>
+<button class="btn-block" (click)="getemplotee()">get employee</button>
+<ul  class="list-group-item-danger">
+  <table>
+    <thead>
+    <tr>
+      <th>نام</th>
+      <th>فامیلی</th>
+    </tr>
+    <tr *ngFor="let employee of employees" >
+      <td>
+        {{employee.salerry}}
+      </td>
+      <td>{{employee.family}}</td>
+    </tr>
+    </thead>
+  </table>
+
+</ul>
+<form [formGroup]="form1" *ngIf="students" (ngSubmit)="showdetailstudent()">
+  <label>foorm students</label>
+  <select formControlName="selectstudents" [ngModel]="selected">
+    <option></option>
+    <option *ngFor="let i of students" [ngValue]="i">{{i.name}}</option>
+  </select>
+<button>detail</button>
+</form>
+<ul class="list-group" *ngIf="detail">
+  <li class="list-group-item">{{name}}</li>
+  <li class="list-group-item">{{family}}</li>
+
+</ul>

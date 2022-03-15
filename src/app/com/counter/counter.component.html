@@ -1,0 +1,32 @@
+<div class="container">
+
+    <div class="card">
+      <div class="card-header" style="text-align: center;background-color: beige">
+        Multiple counter
+      </div>
+      <form [formGroup]="Formcounter">
+
+      <div class="card-body">
+      <div class="col-12 d-flex input-group" style="padding: 30px">
+        <div class="col-6"><input type="number" formControlName="inputnumbeer" class="form-control">
+        </div>
+        <div class="col-3"><button class="btn btn-info btn-outline" (click)="Addcounter()">Add counter</button></div>
+        <div class="col-3"><button class="btn btn-info btn-outline" (click)="Deny()">Clear counter</button></div>
+      </div>
+
+    </div>
+      </form>
+      <div class="row" *ngIf="ListCounter.length>0">
+        <div class="col-3 mb-4"*ngFor="let item of ListCounter;let myindex=index" >
+          <div class="card" >
+            <div class="card-header">step:{{item['step']}}</div>
+            <div class="card-body">
+              <p class="font-weight-bold text-center"  #id [id]="myindex">{{item['value']}}</p>
+              <button class="btn btn-outline-secondary btn-block" (click)="setvalue(myindex,item)">RUN</button>
+            </div>
+          </div>
+        </div>
+        </div>
+    </div>
+
+</div>
